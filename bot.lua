@@ -100,7 +100,7 @@ function tdcli_update_callback(data)
 		elseif input:match('na nafuck') then
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Fucking Progress Has Been Canceled :D_', 1, 'md')
 		elseif input:match('^id$') then
-			local gpid = '_Chat🆔:'..msg.chat_id_..'_'
+			local gpid = '_Chat??:'..msg.chat_id_..'_'
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, gpid, 1, 'md')
 		elseif input:match('^tosuper') then
 			local gpid = msg.chat_id_
@@ -125,6 +125,18 @@ function tdcli_update_callback(data)
 			mame:del(hash)
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
+		elseif input:match('lock fwd$') then
+			mame:hset(msg.chat_id_,'lfwd')
+			--M.forwardMessages
+			tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Fwd Has Been Activated :D</i>', 1, 'html')
+		elseif input:match('unlock fwd$') then
+			mame:hdel(msg.chat_id_,'lfwd')
+			--M.forwardMessages
+			tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Fwd Has Been Deactivated :D</i>', 1, 'html')
+		elseif M.forwardMessages and mame:hget(msg.chat_id_,'lfwd') then
+			--data.message_.text_
+			tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
+
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
 		--tdcli.createNewChannelChat(text, 1, 'A Gp Created With MicroSys Bot\n#Developer : @ShopBuy')
