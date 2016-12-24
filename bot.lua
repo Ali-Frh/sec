@@ -123,7 +123,7 @@ function tdcli_update_callback(data)
 		elseif input:match('^typingall off$') then
 			hash = 'typingall'
 			mame:del(hash)
-		elseif input:match('(.*)') and mame.get('typingall') == 'true' then
+		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
