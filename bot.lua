@@ -97,7 +97,7 @@ function tdcli_update_callback(data)
 		elseif input:match('na nafuck') then
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Fucking Progress Has Been Canceled :D_', 1, 'md')
 		elseif input:match('^id$') then
-			local gpid = '_Chat ًں†” :'..msg.chat_id_..'_'
+			local gpid = '_Chat🆔:'..msg.chat_id_..'_'
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, gpid, 1, 'md')
 		elseif input:match('^tosuper') then
 			local gpid = msg.chat_id_
@@ -110,6 +110,7 @@ function tdcli_update_callback(data)
 		elseif input:match('^typing on$') then
 			hash = 'typing:'..msg.chat_id_
 			redis:set(hash,true)
+			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For This Gp Has Been Activted_', 1, 'md')
 		elseif input:match('^typing off$') then
 			hash = 'typing:'..msg.chat_id_
 			redis:del(hash)
@@ -119,7 +120,7 @@ function tdcli_update_callback(data)
 		elseif input:match('^typingall off$') then
 			hash = 'typingall'
 			redis:del(hash)
-		--elseif input:match('(.*)') and redis.get('typingall') == 'true' then
+		elseif input:match('(.*)') and redis.get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
