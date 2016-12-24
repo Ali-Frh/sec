@@ -158,6 +158,7 @@ function tdcli_update_callback(data)
 		elseif input:match('@') and mame:get('luser:'..msg.chat_id_) then
 			--tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
 			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+		end
 		--elseif input:match('reset lock_username$') then
 		--	mame:set('luser:'..msg.chat_id_)
 		--	tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Username Has Been Reseted :D</i>', 1, 'html')
@@ -165,7 +166,16 @@ function tdcli_update_callback(data)
 		--if redis:get('lock_fwd:'..chat_id) and msg.forward_info_ then
        -- tdcli.deleteMessages(chat_id, {[0] = msg.id_})
  --     end
-
+--------------------##############################
+--settings
+		if input:match('^group settings$') then
+			if mame:get('luser:'..msg.chat_id_) then
+				lock_fwd = 'yes'
+			else
+				lock_fwd = 'no'
+			end
+			text '*Settings Of '..msg.chat_id_..' \n Lock Fwd :'..lock_fwd
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
 		--tdcli.createNewChannelChat(text, 1, 'A Gp Created With MicroSys Bot\n#Developer : @ShopBuy')
