@@ -11,7 +11,7 @@
 --serpent = require('serpent')
 --redis:select(2)}
 tdcli = dofile('tdcli.lua')
-redis = (loadfile "redis.lua")()
+redis = dofile('redis.lua')
 JSON = require('dkjson')
 serpent = require('serpent')
 
