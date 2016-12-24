@@ -147,10 +147,10 @@ function tdcli_update_callback(data)
 --lock username
 	--	elseif input:match('lock username$') and mame:get('luser:'..msg.chat_id_) then
 		--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Activated :D_', 1, 'md')
-		if input:match('lock username$') then
+		if input:match('^lock username$') then
 			mame:set('luser:'..msg.chat_id_, true)
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Activated :D_', 1, 'md')
-		elseif input:match('unlock username$') then
+		elseif input:match('^unlock username$') then
 			mame:del('luser:'..msg.chat_id_)
 			tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Username Has Been Deactivated :D</i>', 1, 'html')
 		--elseif input:match('unlock username$') and not mame:get('luser:'..msg.chat_id_) then
