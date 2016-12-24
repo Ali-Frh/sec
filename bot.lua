@@ -131,7 +131,7 @@ function tdcli_update_callback(data)
 		elseif input:match('unlock fwd$') and mame:get('lfwd:'..msg.chat_id_) then
 			mame:del('lfwd:'..msg.chat_id_)
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Deactivated :D_', 1, 'md')
-		elseif redis:get('lfwd:'..chat_id) and msg.forward_info_ then
+		elseif mame:get('lfwd:'..chat_id) and msg.forward_info_ then
 			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
 		end
 		if input:match('^block') then
