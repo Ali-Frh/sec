@@ -132,7 +132,6 @@ function tdcli_update_callback(data)
 			mame:incr('lfwd'..msg.chat_id_,-1)
 			tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Fwd Has Been Deactivated :D</i>', 1, 'html')
 		elseif msg.forwardMessages and mame:get('lfwd'..msg.chat_id_) == '1' then
-			—data.message_.text_
 			tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
 		elseif input:match('^block') then
 			local id = input:gsub('block', '')
