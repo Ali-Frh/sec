@@ -145,20 +145,20 @@ function tdcli_update_callback(data)
 		end
 -----------------------------------------------------------------------
 --lock username
-		if input:match('lock username$') and mame:get('luser'..msg.chat_id_) then
+		if input:match('lock username$') and mame:get('luser:'..msg.chat_id_) then
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Activated :D_', 1, 'md')
-		elseif input:match('lock username$') and not mame:get('luser'..msg.chat_id_) then
-			mame:set('luser'..msg.chat_id_, true)
+		elseif input:match('lock username$') and not mame:get('luser:'..msg.chat_id_) then
+			mame:set('luser:'..msg.chat_id_, true)
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Has Been Activated :D_', 1, 'md')
-		elseif input:match('unlock username$') and mame:get('luser'..msg.chat_id_) then
-			mame:del('luser'..msg.chat_id_)
+		elseif input:match('unlock username$') and mame:get('luser:'..msg.chat_id_) then
+			mame:del('luser:'..msg.chat_id_)
 			tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Username Has Been Deactivated :D</i>', 1, 'html')
-		elseif input:match('unlock username$') and not mame:get('luser'..msg.chat_id_) then
+		elseif input:match('unlock username$') and not mame:get('luser:'..msg.chat_id_) then
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Deactivated :D_', 1, 'md')
-		elseif input:match('@') and mame:get('luser'..msg.chat_id_) then
+		elseif input:match('@') and mame:get('luser:'..msg.chat_id_) then
 			tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
 		--elseif input:match('reset lock_username$') then
-		--	mame:set('luser'..msg.chat_id_)
+		--	mame:set('luser:'..msg.chat_id_)
 		--	tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Username Has Been Reseted :D</i>', 1, 'html')
 		
 		--if redis:get('lock_fwd:'..chat_id) and msg.forward_info_ then
