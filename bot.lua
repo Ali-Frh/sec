@@ -86,8 +86,8 @@ function tdcli_update_callback(data)
 		tdcli.changeChatTitle(msg.chat_id_, text)
 		elseif input:match('^creategp') then
         local text = input:gsub('creategp', '')
-		tdcli.sendText(msg.chat_id_, 0, 1, '<i> Group Was Created Successfuly </i>', 1, 'html')
 		tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, text)
+		tdcli.sendText(msg.chat_id_, 0, 1, '<i> Group Was Created Successfuly </i>', 1, 'html')
 	elseif input:match('^fuckgp') then
 		local text = input:gsub('fuckgp', '')
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Are You Sure ? :/_\n if yes type *are befuck*\n else type *na nafuck*', 1, 'md')
@@ -118,7 +118,7 @@ function tdcli_update_callback(data)
 		elseif input:match('^typingall off$') then
 			hash = 'typingall'
 			redis:del(hash)
-		elseif input:match('(.*)') and redis.get('typingall') == 'true' then
+		--elseif input:match('(.*)') and redis.get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
