@@ -14,6 +14,7 @@ tdcli = dofile('tdcli.lua')
 --redis = dofile('redis.lua')
 JSON = require('dkjson')
 serpent = require('serpent')
+redis = (loadfile "./libs/redis.lua")()
 
 
 -- Print message format. Use serpent for prettier result.
