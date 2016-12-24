@@ -102,7 +102,7 @@ function tdcli_update_callback(data)
 			local gpid = msg.chat_id_
 			tdcli.migrateGroupChatToChannelChat(gpid)
 		elseif input:match('^getlink') then
-			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_If I,m Creator I,ve Send Gplink On Next Msg_', 1, 'md')
+			--tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_If I,m Creator I,ve Send Gplink On Next Msg_', 1, 'md')
 			tdcli.exportChatInviteLink(msg.chat_id_)
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '<b>Gp Link :'..msg.invite_link_, 1, 'md')
 			--tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, 'lonk :'..ChatInviteLink, 1, 'md')
