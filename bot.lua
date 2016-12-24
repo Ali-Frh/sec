@@ -174,7 +174,7 @@ function tdcli_update_callback(data)
 			else
 				lock_fwd = 'no'
 			end
-			text '*Settings Of '..msg.chat_id_..' \n Lock Fwd :'..lock_fwd
+			text = '*Settings Of '..msg.chat_id_..' \n Lock Fwd :'..lock_fwd
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
