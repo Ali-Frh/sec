@@ -112,18 +112,18 @@ function tdcli_update_callback(data)
 			--tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, 'lonk :'..ChatInviteLink, 1, 'md')
 		elseif input:match('^typing on$') then
 			hash = 'typing:'..msg.chat_id_
-			redis:set(hash,true)
+			mame:set(hash,true)
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Typing Mode For This Gp Has Been Activted_', 1, 'md')
 		elseif input:match('^typing off$') then
 			hash = 'typing:'..msg.chat_id_
-			redis:del(hash)
+			mame:del(hash)
 		elseif input:match('^typingall on$') then
 			hash = 'typingall'
-			redis:set(hash,'true')
+			mame:set(hash,'true')
 		elseif input:match('^typingall off$') then
 			hash = 'typingall'
-			redis:del(hash)
-		elseif input:match('(.*)') and redis.get('typingall') == 'true' then
+			mame:del(hash)
+		elseif input:match('(.*)') and mame.get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
