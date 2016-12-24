@@ -125,15 +125,16 @@ function tdcli_update_callback(data)
 			mame:del(hash)
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
-		elseif input:match('lock fwd$') and mame:get('lfwd'..msg.chat_id_) == '0' then
-			mame:incr('lfwd'..msg.chat_id_,1)
-			tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Fwd Has Been Activated :D</i>', 1, 'html')
-		elseif input:match('unlock fwd$') and mame:get('lfwd'..msg.chat_id_) == '1' then
-			mame:incr('lfwd'..msg.chat_id_,-1)
-			tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Fwd Has Been Deactivated :D</i>', 1, 'html')
-		elseif msg.forwardMessages and mame:get('lfwd'..msg.chat_id_) == '1' then
-			tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
-		elseif input:match('^block') then
+		elseif input:match('lock fwd$') and not mame:get('lfwd:'..msg.chat_id_) then
+			mame:set('lfwd:'..msg.chat_id_, true)
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Activated :D_', 1, 'md')
+		elseif input:match('unlock fwd$') and mame:get('lfwd:'..msg.chat_id_) then
+			mame:del('lfwd:'..msg.chat_id_)
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Deactivated :D_', 1, 'md')
+		elseif redis:get('lfwd:'..chat_id) and msg.forward_info_ then
+			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+		end
+		if input:match('^block') then
 			local id = input:gsub('block', '')
 			tdcli.blockUser(id)
 		elseif input:match('^unblock') then
@@ -141,9 +142,10 @@ function tdcli_update_callback(data)
 			tdcli.unblockUser(id)
 		elseif input:match('^sessions$') then
 			tdcli.getActiveSessions()
+		end
 -----------------------------------------------------------------------
 --lock username
-		elseif input:match('lock username$') and mame:get('luser'..msg.chat_id_) then
+		if input:match('lock username$') and mame:get('luser'..msg.chat_id_) then
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Activated :D_', 1, 'md')
 		elseif input:match('lock username$') and not mame:get('luser'..msg.chat_id_) then
 			mame:set('luser'..msg.chat_id_, true)
@@ -158,6 +160,10 @@ function tdcli_update_callback(data)
 		--elseif input:match('reset lock_username$') then
 		--	mame:set('luser'..msg.chat_id_)
 		--	tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Username Has Been Reseted :D</i>', 1, 'html')
+		
+		--if redis:get('lock_fwd:'..chat_id) and msg.forward_info_ then
+       -- tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+ --     end
 
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
