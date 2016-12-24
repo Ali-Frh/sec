@@ -133,7 +133,7 @@ function tdcli_update_callback(data)
 			mame:hdel(msg.chat_id_,'lfwd')
 			--M.forwardMessages
 			tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Fwd Has Been Deactivated :D</i>', 1, 'html')
-		elseif M.forwardMessages and mame:hget(msg.chat_id_,'lfwd') then
+		elseif msg.forwardMessages and mame:hget(msg.chat_id_,'lfwd') then
 			--data.message_.text_
 			tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
 		elseif input:match('^block') then
