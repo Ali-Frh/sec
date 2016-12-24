@@ -126,14 +126,14 @@ function tdcli_update_callback(data)
 		elseif input:match('(.*)') and mame:get('typingall') == 'true' then
 			tdcli.sendChatAction(msg.chat_id_, 'Typing')
 		elseif input:match('lock fwd$') then
-			mame:hset(msg.chat_id_,'lfwd')
+			mame:set('lfwd'..msg.chat_id_,true)
 			--M.forwardMessages
 			tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Fwd Has Been Activated :D</i>', 1, 'html')
 		elseif input:match('unlock fwd$') then
-			mame:hdel(msg.chat_id_,'lfwd')
+			mame:del('lfwd'..msg.chat_id_)
 			--M.forwardMessages
 			tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Fwd Has Been Deactivated :D</i>', 1, 'html')
-		elseif msg.forwardMessages and mame:hget(msg.chat_id_,'lfwd') then
+		elseif msg.forwardMessages and mame:get('lfwd'..msg.chat_id_) then
 			--data.message_.text_
 			tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
 
