@@ -182,7 +182,7 @@ function tdcli_update_callback(data)
   end
 
 		if input:match('^group settings$') then
-tdcli.sendMessage(chat_id, msg.id_, 1, '<i>SuperGroup Settings:</i>\n<b>__________________</b>\n\n<b>Lock Fwd : </b><code>'..lfwd..'</code>\n<b>Lock Username : </b><code>'..luser..'</code>\n', 1, 'html') 
+tdcli.sendText(chat_id, msg.id_, 1, '<i>SuperGroup Settings:</i>\n<b>__________________</b>\n\n<b>Lock Fwd : </b><code>'..lfwd..'</code>\n<b>Lock Username : </b><code>'..luser..'</code>\n', 1, 'html') 
 
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
