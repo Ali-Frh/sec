@@ -191,7 +191,7 @@ function tdcli_update_callback(data)
 			--end
 					--🔹 -- Abi
 					--🔸 -- Narenji
-		text = '_⚙ Settings Of '..msg.chat_title_..'_\n *🔹 Forwarding Stat :*_'..lfwd..'_\n *🔸 Username Sending Stat :*_'..luser'_\n'
+		text = '_⚙ Settings Of '..msg.chat_title_..'_\n *🔹 Forwarding Stat :*_'..lfwd..'_\n *🔸 Username Sending Stat :*_'..luser..'_\n'
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
