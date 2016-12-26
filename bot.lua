@@ -73,7 +73,7 @@ function tdcli_update_callback(data)
     local msg = data.message_
 	local msg = data.message_
     local input = msg.content_.text_
-    local msg.chat_id_ = msg.chat_id_
+    local chat_id = msg.chat_id_
     local user_id = msg.sender_user_id_
     -- If the message is text message
     if msg.content_.ID == "MessageText" then
