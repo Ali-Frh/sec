@@ -75,8 +75,6 @@ function tdcli_update_callback(data)
     local input = msg.content_.text_
     local chat_id = msg.chat_id_
     local user_id = msg.sender_user_id_
-    local is_fa = mame:get('lang'..msg.chat_id_,true)
-    local is_en = mame:get('lang'..msg.chat_id_,false)
     -- If the message is text message
     if msg.content_.ID == "MessageText" then
       -- And content of the text is...
@@ -148,10 +146,10 @@ function tdcli_update_callback(data)
 	--lang system
 		if input:match('^setlang$') then
 				local lang = input:gsub('setlang', '')
-			if lang == 'fa' and is_en then
+			if lang == 'fa' and not mame:get('lang'..chat_id,true) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*زبان شما به فارسی تغییر نمود*', 1, 'md')
 				mame:set('lang'..msg.chat_id_,true)
-			elseif lang == 'en' and is_fa then
+			elseif lang == 'en' and mame:get('lang'..chat_id,true) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*Group Language Seted To : [EN]*', 1, 'md')
 				mame:set('lang'..msg.chat_id_,false)
 			end
@@ -212,9 +210,9 @@ function tdcli_update_callback(data)
    else 
    ltag = "Unlocked !"
   end
-			if is_fa then
+			if mame:get('lang'..chat_id,true) then
    lang = "فارسی"
-   elseif is_en then 
+   elseif not mame:get('lang'..chat_id,true) then 
    lang = "English"
   end
 		
