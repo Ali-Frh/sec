@@ -242,7 +242,7 @@ text = '_⚙ Settings Of '..msg.chat_id_..'_\n*🔸Gp Language :*_'..lang..'_\n�
 				end
       end
     end
-  elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
+	if (data.ID == "UpdateOption" and data.name_ == "my_id") then
     tdcli_function ({
       ID="GetChats",
       offset_order_="9223372036854775807",
