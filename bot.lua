@@ -170,9 +170,9 @@ function tdcli_update_callback(data)
 --settings
 		local lfwd = 'lfwd:'..chat_id
      if mame:get(lfwd) then
-   lfwd = "yes"
+   lfwd = "Locked !"
    else 
-   lfwd = "no"
+   lfwd = "Unlocked !"
   end
 
 		if input:match('^group settings$') then
@@ -184,7 +184,7 @@ function tdcli_update_callback(data)
 			--	local lock_fwd = 'undefined'
 			--end
 						
-			text = '*Settings Of '..msg.chat_id_..' \n Lock Fwd :'..lfwd
+			text = '_Settings Of '..msg.chat_id_..'\n Lock Forward Stat :_'..lfwd
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
