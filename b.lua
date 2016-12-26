@@ -17,7 +17,7 @@ local function vardump(value)
 end
 function is_sudo(msg)
  local var = false
-  — Check users id in config
+--  — Check users id in config
   for v,user in pairs(sudo_users) do
   if user == msg.sender_user_id_ then
      var = true
