@@ -171,9 +171,12 @@ function tdcli_update_callback(data)
 		if input:match('^group settings$') then
 			if mame:get('lfwd:'..msg.chat_id_) then
 				local lock_fwd = 'yes'
-			else
+			elseif not mame:get('lfwd:'..msg.chat_id_) then
 				local lock_fwd = 'no'
+			elseif lock_fwd == nil then
+				local lock_fwd = 'undefined'
 			end
+						
 			text = '*Settings Of '..msg.chat_id_..' \n Lock Fwd :'..lock_fwd
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
