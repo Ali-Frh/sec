@@ -166,6 +166,19 @@ function tdcli_update_callback(data)
 		--if redis:get('lock_fwd:'..chat_id) and msg.forward_info_ then
        -- tdcli.deleteMessages(chat_id, {[0] = msg.id_})
  --     end
+--lock #tag
+		if input:match('^lock tag$') then
+			mame:set('ltag:'..msg.chat_id_, true)
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock tag Has Been Activated :D_', 1, 'md')
+		elseif input:match('^unlock tag$') then
+			mame:del('ltag:'..msg.chat_id_)
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock tag Has Been Deactivated :D_', 1, 'md')
+		--elseif input:match('unlock username$') and not mame:get('luser:'..msg.chat_id_) then
+		--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Deactivated :D_', 1, 'md')
+		elseif input:match('#') and mame:get('ltag:'..msg.chat_id_) then
+			--tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
+			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+		end
 --------------------##############################
 --settings
 		local lfwd = 'lfwd:'..chat_id
