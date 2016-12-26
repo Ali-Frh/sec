@@ -50,7 +50,7 @@ function tdcli_update_callback(data)
 
     if msg.content_.ID == "MessageText" then
       -- put a function here
-      if input:match('^mute sticker') and user_id = mame:get('mod'..msg.chat_id_) then
+      if input:match('^mute sticker') and user_id == mame:get('mod'..msg.chat_id_) then
 		text = '*Sticker Posting Has Been Disallowed*'
 		mame:set('msticker'..msg.chat_id_,true)
 		tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
