@@ -241,6 +241,7 @@ text = '_⚙ Settings Of '..msg.chat_id_..'_\n*🔸Gp Language :*_'..lang..'_\n�
       --elseif msg.content_.text_ == "PING" then
         -- Reply with formatted text
       --  tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
+				end
       end
     end
   elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
