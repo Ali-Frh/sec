@@ -73,7 +73,7 @@ function tdcli_update_callback(data)
     local msg = data.message_
 	local msg = data.message_
     local input = msg.content_.text_
-    local chat_id = msg.chat_id_
+    local msg.chat_id_ = msg.chat_id_
     local user_id = msg.sender_user_id_
     -- If the message is text message
     if msg.content_.ID == "MessageText" then
@@ -96,7 +96,7 @@ function tdcli_update_callback(data)
 		local text = input:gsub('fuckgp', '')
 		tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Are You Sure ? :/_\n if yes type *are befuck*\n else type *na nafuck*', 1, 'md')
 		elseif input:match('are befuck') then
-		tdcli.closeChat(data.message_.chat_id_)
+		tdcli.closeChat(data.message_.msg.chat_id__)
 		elseif input:match('na nafuck') then
 			tdcli.sendText(msg.chat_id_, 17, 0, 1, nil, '_Fucking Progress Has Been Canceled :D_', 1, 'md')
 		elseif input:match('^id$') then
@@ -131,8 +131,8 @@ function tdcli_update_callback(data)
 		elseif input:match('unlock fwd$') and mame:get('lfwd:'..msg.chat_id_) then
 			mame:del('lfwd:'..msg.chat_id_)
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Fwd Has Been Deactivated :D_', 1, 'md')
-		elseif mame:get('lfwd:'..chat_id) and msg.forward_info_ then
-			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+		elseif mame:get('lfwd:'..msg.chat_id_) and msg.forward_info_ then
+			tdcli.deleteMessages(msg.chat_id_, {[0] = msg.id_})
 		end
 		if input:match('^block') then
 			local id = input:gsub('block', '')
@@ -146,10 +146,10 @@ function tdcli_update_callback(data)
 	--lang system
 		if input:match('^setlang$') then
 				local lang = input:gsub('setlang', '')
-			if lang == 'fa' and not mame:get('lang'..chat_id,true) then
+			if lang == 'fa' and not mame:get('lang'..msg.chat_id_,true) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*زبان شما به فارسی تغییر نمود*', 1, 'md')
 				mame:set('lang'..msg.chat_id_,true)
-			elseif lang == 'en' and mame:get('lang'..chat_id,true) then
+			elseif lang == 'en' and mame:get('lang'..msg.chat_id_,true) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*Group Language Seted To : [EN]*', 1, 'md')
 				mame:set('lang'..msg.chat_id_,false)
 			end
@@ -168,14 +168,14 @@ function tdcli_update_callback(data)
 		--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Deactivated :D_', 1, 'md')
 		elseif input:match('@') and mame:get('luser:'..msg.chat_id_) then
 			--tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
-			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+			tdcli.deleteMessages(msg.chat_id_, {[0] = msg.id_})
 		end
 		--elseif input:match('reset lock_username$') then
 		--	mame:set('luser:'..msg.chat_id_)
 		--	tdcli.sendText(msg.chat_id_, 0, 1, '<i>Lock Username Has Been Reseted :D</i>', 1, 'html')
 		
-		--if redis:get('lock_fwd:'..chat_id) and msg.forward_info_ then
-       -- tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+		--if redis:get('lock_fwd:'..msg.chat_id_) and msg.forward_info_ then
+       -- tdcli.deleteMessages(msg.chat_id_, {[0] = msg.id_})
  --     end
 --lock #tag
 		if input:match('^lock tag$') then
@@ -188,31 +188,31 @@ function tdcli_update_callback(data)
 		--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_Lock Username Already Deactivated :D_', 1, 'md')
 		elseif input:match('#') and mame:get('ltag:'..msg.chat_id_) then
 			--tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
-			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
+			tdcli.deleteMessages(msg.chat_id_, {[0] = msg.id_})
 		end
 --------------------##############################
 --settings
-		local lfwd = 'lfwd:'..chat_id
+		local lfwd = 'lfwd:'..msg.chat_id_
      if mame:get(lfwd) then
    lfwd = "Locked !"
    else 
    lfwd = "Unlocked !"
   end
-				local luser = 'luser'..chat_id
+				local luser = 'luser'..msg.chat_id_
      if mame:get(luser) then
    luser = "Locked !"
    else 
    luser = "Unlocked !"
   end
-				local luser = 'ltag'..chat_id
+				local luser = 'ltag'..msg.chat_id_
 			if mame:get(ltag) then
    ltag = "Locked !"
    else 
    ltag = "Unlocked !"
   end
-			if mame:get('lang'..chat_id,true) then
+			if mame:get('lang'..msg.chat_id_,true) then
    lang = "فارسی"
-   elseif not mame:get('lang'..chat_id,true) then 
+   elseif not mame:get('lang'..msg.chat_id_,true) then 
    lang = "English"
   end
 		
@@ -246,7 +246,7 @@ text = '_⚙ Settings Of '..msg.chat_id_..'_\n*🔸Gp Language :*_'..lang..'_\n�
     tdcli_function ({
       ID="GetChats",
       offset_order_="9223372036854775807",
-      offset_chat_id_=0,
+      offset_msg.chat_id__=0,
       limit_=20
     }, dl_cb, nil)
   end
