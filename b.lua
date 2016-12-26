@@ -15,7 +15,20 @@ mame = Redis.connect('127.0.0.1', 6379)
 local function vardump(value)
   print(serpent.block(value, {comment=false}))
 end
-
+function is_sudo(msg)
+ local var = false
+  — Check users id in config
+  for v,user in pairs(sudo_users) do
+  if user == msg.sender_user_id_ then
+     var = true
+ end
+  end
+  return var
+end
+sudo_users = {
+  205906514,
+  0
+}
 -- Print callback
 function dl_cb(arg, data)
   print('=====================================================================')
