@@ -174,6 +174,12 @@ function tdcli_update_callback(data)
    else 
    lfwd = "Unlocked !"
   end
+				local luser = 'luser'..chat_id
+     if mame:get(luser) then
+   luser = "Locked !"
+   else 
+   luser = "Unlocked !"
+  end
 
 		if input:match('^group settings$') then
 			--if mame:get('lfwd:'..msg.chat_id_) then
@@ -183,8 +189,9 @@ function tdcli_update_callback(data)
 			--elseif lock_fwd == nil then
 			--	local lock_fwd = 'undefined'
 			--end
-						
-			text = '_Settings Of '..msg.chat_id_..'\n Lock Forward Stat :_'..lfwd
+					--🔹 -- Abi
+					--🔸 -- Narenji
+		text = '_⚙ Settings Of '..msg.chat_title_..'_\n *🔹 Forwarding Stat :*_'..lfwd..'_\n *🔸 Username Sending Stat :*_'..luser'_\n'
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
