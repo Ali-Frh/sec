@@ -168,22 +168,14 @@ function tdcli_update_callback(data)
  --     end
 --------------------##############################
 --settings
-			local lfwd = 'lfwd:'..chat_id
-  if mame:get(lfwd) then
-   lfwd = "yes"
-   else 
-   lfwd = "no"
-  end
-						local luser = 'luser:'..chat_id
-  if mame:get(luser) then
-   luser = "yes"
-   else 
-   luser = "no"
-  end
-
 		if input:match('^group settings$') then
-tdcli.sendText(chat_id, msg.id_, 1, '<i>SuperGroup Settings:</i>\n<b>__________________</b>\n\n<b>Lock Fwd : </b><code>'..lfwd..'</code>\n<b>Lock Username : </b><code>'..luser..'</code>\n', 1, 'html') 
-
+			if mame:get('lfwd:'..msg.chat_id_) then
+				local lock_fwd = 'yes'
+			else
+				local lock_fwd = 'no'
+			end
+			text = '*Settings Of '..msg.chat_id_..' \n Lock Fwd :'..lock_fwd
+			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
 		--tdcli.createNewChannelChat(text, 1, 'A Gp Created With MicroSys Bot\n#Developer : @ShopBuy')
