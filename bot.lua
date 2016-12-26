@@ -168,16 +168,23 @@ function tdcli_update_callback(data)
  --     end
 --------------------##############################
 --settings
+		local lfwd = 'lfwd:'..chat_id
+     if mame:get(lfwd) then
+   lfwd = "yes"
+   else 
+   lfwd = "no"
+  end
+
 		if input:match('^group settings$') then
-			if mame:get('lfwd:'..msg.chat_id_) then
-				local lock_fwd = 'yes'
-			elseif not mame:get('lfwd:'..msg.chat_id_) then
-				local lock_fwd = 'no'
-			elseif lock_fwd == nil then
-				local lock_fwd = 'undefined'
-			end
+			--if mame:get('lfwd:'..msg.chat_id_) then
+			--	local lock_fwd = 'yes'
+			--elseif not mame:get('lfwd:'..msg.chat_id_) then
+			--	local lock_fwd = 'no'
+			--elseif lock_fwd == nil then
+			--	local lock_fwd = 'undefined'
+			--end
 						
-			text = '*Settings Of '..msg.chat_id_..' \n Lock Fwd :'..lock_fwd
+			text = '*Settings Of '..msg.chat_id_..' \n Lock Fwd :'..lfwd
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
