@@ -75,6 +75,8 @@ function tdcli_update_callback(data)
     local input = msg.content_.text_
     local chat_id = msg.chat_id_
     local user_id = msg.sender_user_id_
+    local is_fa = mame:get('lang'..msg.chat_id_,true)
+    local is_en = mame:get('lang'..msg.chat_id_,false)
     -- If the message is text message
     if msg.content_.ID == "MessageText" then
       -- And content of the text is...
@@ -143,6 +145,17 @@ function tdcli_update_callback(data)
 		elseif input:match('^sessions$') then
 			tdcli.getActiveSessions()
 		end
+	--lang system
+		if input:match('^setlang$') then
+				local lang = input:gsub('setlang', '')
+			if lang == 'fa' and is_en then
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*زبان شما به فارسی تغییر نمود*', 1, 'md')
+				mame:set('lang'..msg.chat_id_,true)
+			elseif lang == 'en' and is_fa then
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*Group Language Seted To : [EN]*', 1, 'md')
+				mame:set('lang'..msg.chat_id_,false)
+			end
+				
 -----------------------------------------------------------------------
 --lock username
 	--	elseif input:match('lock username$') and mame:get('luser:'..msg.chat_id_) then
@@ -193,6 +206,18 @@ function tdcli_update_callback(data)
    else 
    luser = "Unlocked !"
   end
+				local luser = 'ltag'..chat_id
+			if mame:get(ltag) then
+   ltag = "Locked !"
+   else 
+   ltag = "Unlocked !"
+  end
+			if is_fa then
+   lang = "فارسی"
+   elseif is_en then 
+   lang = "English"
+  end
+		
 
 		if input:match('^group settings$') then
 			--if mame:get('lfwd:'..msg.chat_id_) then
@@ -204,7 +229,7 @@ function tdcli_update_callback(data)
 			--end
 					--🔹 -- Abi
 					--🔸 -- Narenji
-		text = '_⚙ Settings Of '..msg.chat_id_..'_\n *🔹 Forwarding Stat :*_'..lfwd..'_\n *🔸 Username Sending Stat :*_'..luser..'_\n'
+text = '_⚙ Settings Of '..msg.chat_id_..'_\n*🔸Gp Language :*_'..lang..'_\n➖➖➖➖➖➖➖➖\n\n*🔹 Forwarding Stat :*_'..lfwd..'_\n *🔸 Username Sending Stat :*_'..luser..'_\n*🔹 HashTag Sending Stat :*_ '..ltag
 			tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 	
 	-------------------------------------------------Junk Codes :/--------------------------------------------------------------------------
