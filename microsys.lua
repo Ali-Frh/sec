@@ -74,7 +74,7 @@ function tdcli_update_callback(data)
 				text = 'گروه '..name..'با موفقیت ساخته شد'
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 'md')
 			end
-			if input:match('[Cc][Rr]eategp$') then
+			if input:match('creategp$') then
 				if is_sudo(msg) then
 					local name = input:gsub('creategp', '')
 					tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, name)
