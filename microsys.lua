@@ -54,12 +54,16 @@ function tdcli_update_callback(data)
 			local user_id = msg.sender_user_id_
     -- If the message is text message
 		if msg.content_.ID == "MessageText" then
-			if input:match('[Mm][Ee]$') and is_sudo(msg) then
-				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, 'You,re Sudo :/', 1, 'md')
-			elseif input:match('[Mm][Ee]$') and not is_sudo(msg) then
-				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, 'You,re My Dick :D', 1, 'md')
+			if input:match('^مقام من$') and not is_sudo(msg) and not is_mod(msg) then
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما یک کاربر ساده هستید_', 1, 'md')
+			if input:match('^مقام من$') and is_sudo(msg) then
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_تو بابای منی :/_', 1, 'md')
+			elseif input:match('^مقام من$') and is_mod(msg) then
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما مدیر گروه هستید_, 'md')
+			--elseif input:match('^مقام من$') and is_owner(msg) then
+			--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما رهبر گروه هستید_', 'md')
 			end
-			if input:match('[Hh][Ee][Ll][Pp]') then
+			if input:match('^راهنما$') then
 				text = [[Soon :/]]
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 			end
