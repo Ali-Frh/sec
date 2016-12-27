@@ -45,12 +45,12 @@ function tdcli_update_callback(data)
 			local lowrank_msg = 'شما دسترسی کافی برای این کار را ندارید'
     -- If the message is text message
 		if msg.content_.ID == "MessageText" then
-			if input:match('^مقام من$') and not is_sudo(msg) and not is_mod(msg) then
+			if input:match('^مقام من$') and not is_sudo(msg) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما یک کاربر ساده هستید_', 1, 'md')
 			elseif input:match('^مقام من$') and is_sudo(msg) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_تو بابای منی :/_', 1, 'md')
-			elseif input:match('^مقام من$') and is_mod(msg) then
-				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما مدیر گروه هستید_', 'md')
+			--elseif input:match('^مقام من$') and is_mod(msg) then
+				--tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما مدیر گروه هستید_', 'md')
 			--elseif input:match('^مقام من$') and is_owner(msg) then
 			--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما رهبر گروه هستید_', 'md')
 			end
@@ -68,9 +68,16 @@ function tdcli_update_callback(data)
 					local name = input:gsub('creategp', '')
 					tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, name)
 					text = 'گروه '..name..'با موفقیت ساخته شد'
+					text2 = 'A Group Created By'..user_id..'\nname of gp is'..name
 					tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 'md')
+					tdcli.sendText(205906514, 0, 0, 1, nil, text2, 'md')
 			else
 					tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, lowrank_msg, 'md')
+			end
+			if chat_id == redis:get('groups',chat_id) then
+				return true
+			elseif not chat_id == redis:get('groups',chat_id) and not input:match('^افزودن$') then
+				return false
 			end
 		end
 --if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
