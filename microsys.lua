@@ -59,7 +59,7 @@ function tdcli_update_callback(data)
 			if input:match('^مقام من$') and is_sudo(msg) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_تو بابای منی :/_', 1, 'md')
 			elseif input:match('^مقام من$') and is_mod(msg) then
-				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما مدیر گروه هستید_, 'md')
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما مدیر گروه هستید_', 'md')
 			--elseif input:match('^مقام من$') and is_owner(msg) then
 			--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما رهبر گروه هستید_', 'md')
 			end
