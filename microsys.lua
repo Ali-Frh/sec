@@ -76,9 +76,11 @@ function tdcli_update_callback(data)
 			end
 			if chat_id == redis:get('groups',chat_id) then
 				return true
-			elseif not chat_id == redis:get('groups',chat_id) and not input:match('^افزودن$') then
+			elseif not chat_id == redis:get('groups',chat_id) and not input:match('^افزودن$') and not input:match('^حذف گروه$') then
 				return false
 			end
+			--if input:match('^افزودن$') and is_sudo(msg) then
+				
 		end
 --if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
 	elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
