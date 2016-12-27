@@ -42,7 +42,7 @@ function tdcli_update_callback(data)
 			local input = msg.content_.text_
 			local chat_id = msg.chat_id_
 			local user_id = msg.sender_user_id_
-			local lowrank_msg = 'شما دسترسی کافی برای این کار را ندارید'
+			--local lowrank_msg = 'شما دسترسی کافی برای این کار را ندارید'
     -- If the message is text message
 		if msg.content_.ID == "MessageText" then
 			if input:match('^مقام من$') and not is_sudo(msg) then
@@ -71,8 +71,6 @@ function tdcli_update_callback(data)
 					text2 = 'A Group Created By'..user_id..'\nname of gp is'..name
 					tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 'md')
 					tdcli.sendText(205906514, 0, 0, 1, nil, text2, 'md')
-			elseif not is_sudo(msg) then
-					tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, lowrank_msg, 'md')
 			end
 			if chat_id == redis:get('groups',chat_id) then
 				return true
