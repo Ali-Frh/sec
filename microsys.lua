@@ -52,6 +52,7 @@ function tdcli_update_callback(data)
 			local input = msg.content_.text_
 			local chat_id = msg.chat_id_
 			local user_id = msg.sender_user_id_
+			local lowrank_msg = 'شما دسترسی کافی برای این کار را ندارید'
     -- If the message is text message
 		if msg.content_.ID == "MessageText" then
 			if input:match('^مقام من$') and not is_sudo(msg) and not is_mod(msg) then
@@ -72,6 +73,14 @@ function tdcli_update_callback(data)
 				tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, name)
 				text = 'گروه '..name..'با موفقیت ساخته شد'
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 'md')
+			end
+			if input:match('[Cc][Rr]eategp$') and is_sudo(msg) then
+				local name = input:gsub('creategp', '')
+				tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, name)
+				text = 'گروه '..name..'با موفقیت ساخته شد'
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 'md')
+			else
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, lowrank_msg, 'md')
 			end
 --if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
 		end
