@@ -30,29 +30,27 @@ function is_sudo(msg)
 end
 function tdcli_update_callback(data)
   --vardump(data)
-  if (data.ID == "UpdateNewMessage") then
-    local msg = data.message_
-	local msg = data.message_
-    local input = msg.content_.text_
-    local chat_id = msg.chat_id_
-    local user_id = msg.sender_user_id_
+	if (data.ID == "UpdateNewMessage") then
+			local msg = data.message_
+			local msg = data.message_
+			local input = msg.content_.text_
+			local chat_id = msg.chat_id_
+			local user_id = msg.sender_user_id_
     -- If the message is text message
-    if msg.content_.ID == "MessageText" then
-if msg.content_.text_ == "PING" and is_sudo(msg) then
-tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
-elseif msg.content_.text_ == "PING" and is_sudo(msg) then
-tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>You,re Zuccini :D</b>', 1, 'html')
-end
+		if msg.content_.ID == "MessageText" then
+			if msg.content_.text_ == "PING" and is_sudo(msg) then
+				tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
+			elseif msg.content_.text_ == "PING" and is_sudo(msg) then
+				tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>You,re Zuccini :D</b>', 1, 'html')
+			end
 --if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
-end
-end
-  function tdcli_update_callback(data) 
-  elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
+		end
+	elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
     tdcli_function ({
       ID="GetChats",
       offset_order_="9223372036854775807",
       offset_chat_id_=0,
       limit_=20
     }, dl_cb, nil)
-  end
+	end
 end
