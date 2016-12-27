@@ -4,11 +4,25 @@ redis = db.connect('127.0.0.1', 6379)
 tdcli = dofile('tdcli.lua')
 serpent = require('serpent')
 redis:select(2)
-gp = -1098875707
+--gp = -1098875707
+--sudo_users = {
+--205906514,
+--286198110,
+--0
+--}
+function is_sudo(msg)
+  local var = false
+  — Check users id in config
+for v,user in pairs(sudo_users) do
+   if user == msg.sender_user_id_ then
+     var = true
+  end
+  end
+  return var
+end
 sudo_users = {
-205906514,
-286198110,
-0
+  105616381,
+  0
 }
 function dl_cb(arg, data)
   vardump(arg)
@@ -20,16 +34,16 @@ end
 function vardump2(value)
   return serpent.block(value, {comment=true})
 end
-function is_sudo(msg)
-  local var = false
-  for k,v in pairs(sudo_users)do 
-    if k == msg.sender_user_id_  then
-      var = true
-    end
-	end
-	
-  return var
-end
+--function is_sudo(msg)
+--  local var = false
+ -- for k,v in pairs(sudo_users)do 
+ --   if k == msg.sender_user_id_  then
+ --     var = true
+--    end
+--	end
+--	
+--  return var
+--end
 function tdcli_update_callback(data)
   --vardump(data)
 	if (data.ID == "UpdateNewMessage") then
