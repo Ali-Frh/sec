@@ -62,6 +62,7 @@ function tdcli_update_callback(data)
 			if input:match('[Hh][Ee][Ll][Pp]') then
 				text = [[Soon :/]]
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
+			end
 --if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
 		end
 	elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
