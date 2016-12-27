@@ -46,9 +46,6 @@ end
 --if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
 end
 end
-function up()
-tdcli.sendMessage(999999999, 0, 1, '*bot runing at*\n', 1, 'md')
-end
   function tdcli_update_callback(data) 
   elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
     tdcli_function ({
