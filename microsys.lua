@@ -45,12 +45,12 @@ function tdcli_update_callback(data)
 			local lowrank_msg = 'شما دسترسی کافی برای این کار را ندارید'
     -- If the message is text message
 		if msg.content_.ID == "MessageText" then
-			if input:match('^مقام من$') and not is_sudo(msg) then
+			if input:match('^مقام من$') and not is_sudo(msg) and not is_mod(msg) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما یک کاربر ساده هستید_', 1, 'md')
 			elseif input:match('^مقام من$') and is_sudo(msg) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_تو بابای منی :/_', 1, 'md')
-			--elseif input:match('^مقام من$') and is_mod(msg) then
-			--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما مدیر گروه هستید_', 'md')
+			elseif input:match('^مقام من$') and is_mod(msg) then
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما مدیر گروه هستید_', 'md')
 			--elseif input:match('^مقام من$') and is_owner(msg) then
 			--	tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '_شما رهبر گروه هستید_', 'md')
 			end
@@ -64,18 +64,16 @@ function tdcli_update_callback(data)
 				text = 'گروه '..name..'با موفقیت ساخته شد'
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 'md')
 			end
-			if input:match('creategp$') then
-				if is_sudo(msg) then
+			if input:match('creategp$') and is_sudo(msg) then
 					local name = input:gsub('creategp', '')
 					tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, name)
 					text = 'گروه '..name..'با موفقیت ساخته شد'
 					tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 'md')
-				elseif not is_sudo(msg) then
+			else
 					tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, lowrank_msg, 'md')
-				end
 			end
---if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
 		end
+--if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
 	elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
     tdcli_function ({
       ID="GetChats",
