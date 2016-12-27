@@ -39,9 +39,9 @@ function tdcli_update_callback(data)
     -- If the message is text message
 		if msg.content_.ID == "MessageText" then
 			if msg.content_.text_ == "PING" and is_sudo(msg) then
-				tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
-			elseif msg.content_.text_ == "PING" then
-				tdcli.sendText(msg.chat_id_, 0, 1, '<b>You,re Zuccini :D</b>', 1, 'html')
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, 'You,re Sudo :/', 1, 'md')
+			elseif msg.content_.text_ == "PING" and is_sudo(msg) then
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, 'You,re My Dick :D', 1, 'md')
 			end
 --if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
 		end
