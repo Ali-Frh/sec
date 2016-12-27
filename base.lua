@@ -38,8 +38,10 @@ function tdcli_update_callback(data)
     local user_id = msg.sender_user_id_
     -- If the message is text message
     if msg.content_.ID == "MessageText" then
-if msg.content_.text_ == "PING" then
+if msg.content_.text_ == "PING" and is_sudo(msg) then
 tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
+elseif msg.content_.text_ == "PING" and is_sudo(msg) then
+tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>You,re Zuccini :D</b>', 1, 'html')
 end
 --if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
 end
@@ -48,15 +50,6 @@ function up()
 tdcli.sendMessage(999999999, 0, 1, '*bot runing at*\n', 1, 'md')
 end
   function tdcli_update_callback(data) 
-  if (data.ID == "UpdateNewMessage") then
-    local msg = data.message_
-    if msg.content_.ID == "MessageText"  then
-	if  is_sudo(msg) then
-     to_msg(msg)
-	 else
-	 stats(msg)
-	 
-    end
   elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
     tdcli_function ({
       ID="GetChats",
@@ -65,9 +58,4 @@ end
       limit_=20
     }, dl_cb, nil)
   end
-end
-end
-
-
-
 end
