@@ -59,7 +59,9 @@ function tdcli_update_callback(data)
 			elseif input:match('[Mm][Ee]$') and not is_sudo(msg) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, 'You,re My Dick :D', 1, 'md')
 			end
-			if input:match('[Hh][Ee][Ll][Pp]') 
+			if input:match('[Hh][Ee][Ll][Pp]') then
+				text = [[Soon :/]]
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 --if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
 		end
 	elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
