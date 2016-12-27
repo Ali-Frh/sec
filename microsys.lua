@@ -67,6 +67,12 @@ function tdcli_update_callback(data)
 				text = [[Soon :/]]
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 1, 'md')
 			end
+			if input:match('^ساخت گروه$') then
+				local name = input:gsub('ساخت گروه', '')
+				tdcli.createNewGroupChat({[0] = msg.sender_user_id_}, name)
+				text = 'گروه '..name..'با موفقیت ساخته شد'
+				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, text, 'md')
+			end
 --if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
 		end
 	elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
