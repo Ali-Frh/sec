@@ -95,6 +95,7 @@ function tdcli_update_callback(data)
 			--tdcli.deleteMessages(msg.chat_id_, data.message_.text_)
 			tdcli.deleteMessages(chat_id, {[0] = msg.id_})
 			--lang system
+		end
 		if input:match('^setlang$') then
 				local lang = input:gsub('setlang', '')
 			if lang == 'fa' and not mame:get('lang'..chat_id,true) then
@@ -103,7 +104,7 @@ function tdcli_update_callback(data)
 			elseif lang == 'en' and mame:get('lang'..chat_id,true) then
 				tdcli.sendText(msg.chat_id_, 0, 0, 1, nil, '*Group Language Seted To : [EN]*', 1, 'md')
 				mame:set('lang'..msg.chat_id_,false)
-			end
+		end
 				
 -----------------------------------------------------------------------
 --lock username
@@ -195,5 +196,6 @@ function tdcli_update_callback(data)
       limit_=20
     }, dl_cb, nil)
 	end
+end
 end
 end
