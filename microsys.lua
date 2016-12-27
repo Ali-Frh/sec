@@ -18,7 +18,6 @@ end
 
 sudo_users = {
   215184910,--microsys
- 205906514,
   0
 }
 
@@ -196,4 +195,5 @@ function tdcli_update_callback(data)
       limit_=20
     }, dl_cb, nil)
 	end
+end
 end
