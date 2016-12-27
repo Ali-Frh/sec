@@ -12,7 +12,7 @@ redis:select(2)
 --}
 function is_sudo(msg)
   local var = false
-  — Check users id in config
+ -- — Check users id in config
 for v,user in pairs(sudo_users) do
    if user == msg.sender_user_id_ then
      var = true
@@ -21,7 +21,7 @@ for v,user in pairs(sudo_users) do
   return var
 end
 sudo_users = {
-  105616381,
+  215184910,--microsys
   0
 }
 function dl_cb(arg, data)
