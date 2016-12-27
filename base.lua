@@ -28,25 +28,22 @@ function is_sudo(msg)
 	
   return var
 end
-function users(arg, data)
-for i=0, #data.users_ do
-redis:sadd('bot:addlist',data.users_[i].id_)
-end 
-end
-
-function add_member(msg)
-local users = redis:smembers('bot:addlist')
-local user = 999999999
-for k,v in pairs(users) do
-user = user..','..v
-tdcli.addChatMember(msg.chat_id_, v, 20)
-end
-end
+function tdcli_update_callback(data)
+  --vardump(data)
+  if (data.ID == "UpdateNewMessage") then
+    local msg = data.message_
+	local msg = data.message_
+    local input = msg.content_.text_
+    local chat_id = msg.chat_id_
+    local user_id = msg.sender_user_id_
+    -- If the message is text message
+    if msg.content_.ID == "MessageText" then
 if msg.content_.text_ == "PING" then
 tdcli.sendMessage(msg.chat_id_, 0, 1, '<b>PONG</b>', 1, 'html')
 end
 --if msg.content_.text_ == "/f2a" and msg.reply_to_message_id_ then
-
+end
+end
 function up()
 tdcli.sendMessage(999999999, 0, 1, '*bot runing at*\n', 1, 'md')
 end
@@ -60,8 +57,6 @@ end
 	 stats(msg)
 	 
     end
-	elseif msg.content_.contact_ and msg.content_.contact_.ID == "Contact" then
-	addlist(msg)
   elseif (data.ID == "UpdateOption" and data.name_ == "my_id") then
     tdcli_function ({
       ID="GetChats",
@@ -75,3 +70,4 @@ end
 
 
 
+end
